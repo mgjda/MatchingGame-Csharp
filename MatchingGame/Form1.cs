@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace MatchingGame
 {
     public partial class Form1 : Form
     {
+
+        private int gameTime = 0;
         // firstClicked points to the first Label control 
         // that the player clicks, but it will be null 
         // if the player hasn't clicked a label yet
@@ -59,6 +62,7 @@ namespace MatchingGame
         {
             InitializeComponent();
             AssignIconsToSquares();
+            timer2.Start();
         }
 
         /// <summary>
@@ -165,12 +169,19 @@ namespace MatchingGame
                         return;
                 }
             }
+            timer2.Stop();
 
             // If the loop didn't return, it didn't find
             // any unmatched icons
             // That means the user won. Show a message and close the form
-            MessageBox.Show("You matched all the icons!", "Congratulations");
+            MessageBox.Show("You matched all the icons!\nTime: " + (double)gameTime/10 + " seconds", "Congratulations");
             Close();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            // Increase time count every 100 ms
+            gameTime++;
         }
     }
 }
