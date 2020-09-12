@@ -14,9 +14,9 @@ namespace MatchingGame
 {
     public partial class Form1 : Form
     {
-        private SoundPlayer pairSound = new SoundPlayer("Sounds/pair.wav");
-        private SoundPlayer notPairSound = new SoundPlayer("Sounds/notpair.wav");
-        private SoundPlayer flipCardSound = new SoundPlayer("Sounds/flipcard.wav");
+        private SoundPlayer pairSound = new SoundPlayer(MatchingGame.Properties.Resources.pair);
+        private SoundPlayer notPairSound = new SoundPlayer(MatchingGame.Properties.Resources.notpair);
+        private SoundPlayer flipCardSound = new SoundPlayer(MatchingGame.Properties.Resources.flipcard);
 
         // game time counter
         private int gameTime = 0;
