@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,8 +14,13 @@ namespace MatchingGame
 {
     public partial class Form1 : Form
     {
+        private SoundPlayer pairSound = new SoundPlayer("Sounds/pair.wav");
+        private SoundPlayer notPairSound = new SoundPlayer("Sounds/notpair.wav");
+        private SoundPlayer flipCardSound = new SoundPlayer("Sounds/flipcard.wav");
 
+        // game time counter
         private int gameTime = 0;
+
         // firstClicked points to the first Label control 
         // that the player clicks, but it will be null 
         // if the player hasn't clicked a label yet
@@ -72,6 +78,8 @@ namespace MatchingGame
         /// <param name="e"></param>
         private void label_Click(object sender, EventArgs e)
         {
+            flipCardSound.Play();
+
             // The timer is only on after two non-matching 
             // icons have been shown to the player, 
             // so ignore any clicks if the timer is running
@@ -121,6 +129,7 @@ namespace MatchingGame
                 // so the player can click another icon
                 if (firstClicked.Text == secondClicked.Text)
                 {
+                    
                     firstClicked = null;
                     secondClicked = null;
                     return;
@@ -148,6 +157,7 @@ namespace MatchingGame
             // clicked, the program knows it's the first click
             firstClicked = null;
             secondClicked = null;
+            notPairSound.Play();
         }
 
         /// <summary>
@@ -170,7 +180,7 @@ namespace MatchingGame
                 }
             }
             timer2.Stop();
-
+            pairSound.Play();
             // If the loop didn't return, it didn't find
             // any unmatched icons
             // That means the user won. Show a message and close the form
